@@ -26,7 +26,6 @@
 		    return query_string;
 		} ();
 	    function open_store() {
-	    	console.log("Timeout. Open fallback url: " + QueryString.storeURL) ;	    	
 	    	document.location.href = QueryString.storeURL ;	    	 
 	    }
 	    
@@ -47,7 +46,6 @@
 	    	}   	
 	    	var appURL = QueryString.customSchemeURL + "?" + customParams ;
 	    	document.location.href = appURL ;		
-	    	console.log("Opening URL: " + appURL) ;
 	    	open_store_timeout() ;
 	    }
 	</script>	
