@@ -38,7 +38,6 @@
 	    	var customParams = "" ;
 	    	var separador = "" ;
 	    	for (var key in QueryString) {
-	    		console.log(">>>>", key);
 	    		if (["customSchemeURL", "storeURL"].indexOf(key) < 0) {
 	    			customParams += separador + key + "=" + QueryString[key] ;
 	    			separador = "&" ;
