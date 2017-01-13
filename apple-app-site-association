@@ -1,0 +1,15 @@
+{
+    "webcredentials":{"apps":["EQHXZ8M8AV.com.google.ios.youtube.dev"]},
+    "activitycontinuation":{"apps":["EQHXZ8M8AV.com.google.ios.youtube.dev"]},
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "EQHXZ8M8AV.com.google.ios.youtube.dev",
+                "paths": [
+                    "*",
+                ]
+            }
+         ]
+    }
+}
