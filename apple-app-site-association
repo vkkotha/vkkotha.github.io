@@ -5,7 +5,7 @@
             {
                 "appID": "EQHXZ8M8AV.com.google.ios.youtube.dev",
                 "paths": [
-                    "*"
+                    "/yout/*"
                 ]
             }
          ]
