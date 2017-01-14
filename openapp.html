@@ -167,12 +167,11 @@
 					document.location.href = appURL;
 				}
 
-				if (!useUniversalLink) {
-			        window.setTimeout(function () {
-						document.getElementById("info").innerHTML = "Loading ..." + "<br/>" + appStoreURL;
-	                	document.location.href = appStoreURL;
-			        }, 1000);
-			    }
+		        window.setTimeout(function () {
+		        	// This will run if app is not installed.
+					document.getElementById("info").innerHTML = "Loading ..." + "<br/>" + appStoreURL;
+                	document.location.href = appStoreURL;
+		        }, 1000);
 			} else {
 				if (typeof QueryString.fallback === "undefined") {
 					if (isAppFound) {
