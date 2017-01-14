@@ -142,6 +142,7 @@
 		var open_app = function() {
 			if (isAppFound && (isiOS || isAndroid)) {
 
+				var appStoreURL = "";
 				if (isiOS) {
 					appStoreURL = "itms-apps://itunes.apple.com/app/" + app.iosAppStoreId + "?mt=8";
 				} else {
@@ -149,11 +150,9 @@
 				}
 
 				var useUniversalLink = isiOS && (iOSVersion >= 9.0) && app.universalLinkSupport;
-				var appStoreURL = "";
 				var appURL = "";
 				if (useUniversalLink) {
 					appURL = "http://" + app.appDomain + "/" + appPath;
-
 					// if App is not installed the domain hosting the app will get the request
 				} else {
 					appURL = app.appURI + "://" + ((appPath.length > 0) ? appPath : "?");
