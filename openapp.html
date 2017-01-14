@@ -6,6 +6,8 @@
 
   <title>Deep Link</title>
   	<script language="javascript">
+  	/*
+  	(function() {
 		var QueryString = function () {
 		  var query_string = {};
 		  var query = window.location.search.substring(1);
@@ -47,10 +49,126 @@
 	    	document.location.href = appURL ;		
 	    	open_store_timeout() ;
 	    }
+	})();
+	*/
+	(function() {
+		var apps = {
+			youtube: {
+				iosAppStoreId : 'youtube-watch-share-videos/id544007664',
+				androidAppStoreId: 'com.google.android.youtube',
+				appURI: 'youtube',
+				appDomain: 'www.youtube.com',
+				universalLinkSupport: true
+			},
+			twitter: {
+				iosAppStoreId : 'twitter/id333903271',
+				androidAppStoreId: 'com.twitter.android',
+				appURI: 'twitter',
+				appDomain: 'www.twitter.com',
+				universalLinkSupport: false
+			},
+			facebook: {
+				iosAppStoreId : 'facebook/id284882215',
+				androidAppStoreId: 'com.facebook.katana',
+				appURI: 'fb',
+				appDomain: 'www.facebook.com',
+				universalLinkSupport: false
+			}
+		};
+
+		var QueryString = function () {
+		  var query_string = {};
+		  var query = window.location.search.substring(1);
+		  var vars = query.split("&");
+		  for (var i=0;i<vars.length;i++) {
+		    var spair = vars[i].split("=");
+		    var pair = spair.splice(0,1);
+		    pair.push(spair.join("="));
+		    if (typeof query_string[pair[0]] === "undefined") {
+		      query_string[pair[0]] = pair[1];
+		    } else if (typeof query_string[pair[0]] === "string") {
+		      var arr = [ query_string[pair[0]], pair[1] ];
+		      query_string[pair[0]] = arr;
+		    } else {
+		      query_string[pair[0]].push(pair[1]);
+		    }
+		  }
+		    return query_string;
+		} ();
+
+    	var customParams = "";
+    	var separator = "";
+	   	for (var key in QueryString) {
+    		if (["path", "app", "fallback"].indexOf(key) < 0) {
+    			customParams += separator + key + "=" + QueryString[key];
+    			separator = "&" ;
+    		}
+    	}   	
+
+    	var appPath = QueryString.path + (customParams.length > 0 ? "?" + customParams : "");
+    	var appPath = appPath + (typeof window.location.hash === "undefined" ? "" : window.location.hash);
+	    var isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+        var isAndroid = /Android/i.test(navigator.userAgent);
+ 
+ 		/*
+		console.log('isiOS:', isiOS, 'isAndroid:', isAndroid);
+		console.log('QueryString.app:', QueryString.app);
+		console.log('QueryString.path:', QueryString.path);
+		console.log('QueryString.fallback:', QueryString.fallback);
+		console.log('appPath:', appPath);
+		console.log('window.location.search:', window.location.search);
+		console.log('window.location.hash:', window.location.hash);
+		console.log('window.location:', window.location);
+		console.log('navigator.userAgent:', navigator.userAgent);
+		*/
+
+		var app = apps[QueryString.app];
+		var isAppFound = (typeof app === "undefined") ? false: true;
+		// console.log('isAppFound:', isAppFound);
+
+		var open_app = function() {
+			if (isAppFound && (isiOS || isAndroid)) {
+				var appStoreURL = "";
+				var	appURL = app.appURI + "://" + appPath;
+				if (isiOS) {
+					appStoreURL = "itms-apps://itunes.apple.com/app/" + app.iosAppStoreId + "?mt=8";
+				} else {
+					appStoreURL = "https://play.google.com/store/apps/details?id=" + app.androidAppStoreId;
+				}
+
+				if (isiOS) {
+					document.getElementById('loader').src = appURL;
+				} else {
+					document.location.replace(appURL);
+				}
+
+		        window.setTimeout(function (){
+	                document.location.replace(appStoreURL);
+		        }, 1000);
+
+			} else {
+				if (typeof QueryString.fallback === "undefined") {
+					if (isAppFound) {
+						var webPath = "http://" + app.appDomain;
+						webPath += (appPath === "undefined") ? "" : "/" + appPath;
+						document.location.replace(webPath);
+					} else {
+						alert("fallback url not defined");
+					}
+				} else {
+					document.location.replace(QueryString.fallback);
+				}	
+			}
+		};
+
+		window.onload = open_app;
+
+	})();
 	</script>	
 
 </head>
 
-<body onLoad="open_app()" style="background: #00A4E6">
+<body style="background: #00A4E6">
+<iframe style="display:none" height="0" width="0" id="loader"></iframe>
 </body>
 </html>
