@@ -142,8 +142,12 @@
 					document.location.replace(appURL);
 				}
 
-		        window.setTimeout(function (){
-	                document.location.replace(appStoreURL);
+		        window.setTimeout(function () {
+		        	if (isiOS) {
+		        		document.getElementById('loader').src = appStoreURL;
+		        	} else {
+	                	document.location.replace(appStoreURL);
+	                }
 		        }, 1000);
 
 			} else {
@@ -154,6 +158,7 @@
 						document.location.replace(webPath);
 					} else {
 						alert("fallback url not defined");
+						return;
 					}
 				} else {
 					document.location.replace(QueryString.fallback);
