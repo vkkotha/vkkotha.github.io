@@ -107,6 +107,9 @@
 
     	var appPath = QueryString.path + (customParams.length > 0 ? "?" + customParams : "");
     	var appPath = appPath + (typeof window.location.hash === "undefined" ? "" : window.location.hash);
+    	if (appPath === "undefined") { 
+    		appPath = "";
+    	}
 	    var isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
         var isAndroid = /Android/i.test(navigator.userAgent);
  
@@ -151,7 +154,7 @@
 				if (typeof QueryString.fallback === "undefined") {
 					if (isAppFound) {
 						var webPath = "http://" + app.appDomain;
-						webPath += (appPath === "undefined") ? "" : "/" + appPath;
+						webPath += (appPath.length > 0) ? "/" + appPath : "";
 						document.location.replace(webPath);
 					} else {
 						alert("fallback url not defined");
