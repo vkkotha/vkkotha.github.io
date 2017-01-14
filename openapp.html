@@ -136,7 +136,7 @@
 			if (isAppFound && (isiOS || isAndroid)) {
 				var appStoreURL = "";
 				var appURL = "";
-				if (iOSVersion < 9.0) {
+				if (isiOS && iOSVersion < 9.0) {
 					appURL = app.appURI + "/" + appPath;
 				} else {
 					appURL = "http://" + app.Domain + "://" + appPath;
