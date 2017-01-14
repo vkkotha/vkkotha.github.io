@@ -149,17 +149,17 @@
 				}
 
 				if (isiOS && iOSVersion < 9.0) {
-					document.getElmentById("info").innerHTML = "Loading ..." + "<br/>" + appURL;
+					document.getElementById("info").innerHTML = "Loading ..." + "<br/>" + appURL;
 					document.getElementById('loader').src = appURL;
 				} else {
-					document.getElmentById("info").innerHTML = "Loading ..." + "<br/>" + appURL;
-					window.location.href = appURL;
+					document.getElementById("info").innerHTML = "Loading ..." + "<br/>" + appURL;
+					document.location.href = appURL;
 				}
 
 		        window.setTimeout(function () {
-					document.getElmentById("info").innerHTML = "Loading ..." + "<br/>" + appStoreURL;
+					document.getElementById("info").innerHTML = "Loading ..." + "<br/>" + appStoreURL;
 					window.setTimeout(function() {
-	                	windows.location.href = appStoreURL;
+	                	document.location.href = appStoreURL;
 					}, 5000);
 		        }, 1000);
 
@@ -168,13 +168,14 @@
 					if (isAppFound) {
 						var webPath = "http://" + app.appDomain;
 						webPath += (appPath.length > 0) ? "/" + appPath : "";
-						window.location.href = webPath;
+						document.getElementById("info").innerHTML = "Loading ..." + "<br/>" + webPath;
+						document.location.href = webPath;
 					} else {
-						alert("fallback url not defined");
-						return;
+						document.getElementById("info").innerHTML = "fallback url not defined";
+						return false;
 					}
 				} else {
-					window.location.href = QueryString.fallback;
+					document.location.href = QueryString.fallback;
 				}	
 			}
 		};
