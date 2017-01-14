@@ -153,13 +153,13 @@
 					document.getElementById('loader').src = appURL;
 				} else {
 					document.getElementById("info").innerHTML = "Loading ..." + "<br/>" + appURL;
-					// document.location.href = appURL;
+					document.location.href = appURL;
 				}
 
 		        window.setTimeout(function () {
 					document.getElementById("info").innerHTML = "Loading ..." + "<br/>" + appStoreURL;
 					window.setTimeout(function() {
-	                	// document.location.href = appStoreURL;
+	                	document.location.href = appStoreURL;
 					}, 5000);
 		        }, 1000);
 
