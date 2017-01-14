@@ -149,7 +149,7 @@
 					appStoreURL = "https://play.google.com/store/apps/details?id=" + app.androidAppStoreId;
 				}
 
-				if (isiOS) {
+				if (isiOS && iOSVersion < 9.0) {
 					document.getElementById('loader').src = appURL;
 				} else {
 					document.location.replace(appURL);
