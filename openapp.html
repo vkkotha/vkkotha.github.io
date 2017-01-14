@@ -148,7 +148,7 @@
 					appStoreURL = "https://play.google.com/store/apps/details?id=" + app.androidAppStoreId;
 				}
 
-				var useUniversalLink = isiOS && iOSVersion >= 9.0 && app.universalLinkSupport;
+				var useUniversalLink = isiOS && (iOSVersion >= 9.0) && app.universalLinkSupport;
 				var appStoreURL = "";
 				var appURL = "";
 				if (useUniversalLink) {
