@@ -127,6 +127,7 @@
 		// console.log('isAppFound:', isAppFound);
 
 		var open_app = function() {
+			alert('isiOS: ' + isiOS);
 			if (isAppFound && (isiOS || isAndroid)) {
 				var appStoreURL = "";
 				var	appURL = app.appURI + "://" + appPath;
