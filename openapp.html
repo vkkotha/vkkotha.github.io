@@ -128,6 +128,7 @@
 		var app = apps[QueryString.app];
 		var isAppFound = (typeof app === "undefined") ? false: true;
 		// console.log('isAppFound:', isAppFound);
+		alert(navigator.userAgent);
 
 		var open_app = function() {
 			if (isAppFound && (isiOS || isAndroid)) {
