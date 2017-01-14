@@ -65,13 +65,13 @@
 				androidAppStoreId: 'com.twitter.android',
 				appURI: 'twitter',
 				appDomain: 'www.twitter.com',
-				universalLinkSupport: false
+				universalLinkSupport: true
 			},
 			facebook: {
 				iosAppStoreId : 'facebook/id284882215',
 				androidAppStoreId: 'com.facebook.katana',
 				appURI: 'fb',
-				appDomain: 'fb',
+				appDomain: 'www.facebook.com',
 				universalLinkSupport: false
 			}
 		};
@@ -136,9 +136,10 @@
 			if (isAppFound && (isiOS || isAndroid)) {
 				var appStoreURL = "";
 				var appURL = "";
-				if (isiOS && iOSVersion < 9.0) {
+				if ( (isiOS && iOSVersion < 9.0) || !app.universalLinkSupport) {
 					appURL = app.appURI + "://" + appPath;
 				} else {
+					if (app)
 					appURL = "http://" + app.appDomain + "/" + appPath;
 				}
 
