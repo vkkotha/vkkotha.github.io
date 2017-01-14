@@ -131,12 +131,18 @@
 		var app = apps[QueryString.app];
 		var isAppFound = (typeof app === "undefined") ? false: true;
 		// console.log('isAppFound:', isAppFound);
-		alert(iOSVersion);
 
 		var open_app = function() {
 			if (isAppFound && (isiOS || isAndroid)) {
 				var appStoreURL = "";
-				var	appURL = app.appURI + "://" + appPath;
+				var appURL = "";
+				if (iOSVersion >= 9.0) {
+					appURL = "http://" + app.appDomain + "/" + appPath;
+				} else {
+					appURL = app.appURI + "://" + appPath;
+				}
+				alert(appURL);
+
 				if (isiOS) {
 					appStoreURL = "itms-apps://itunes.apple.com/app/" + app.iosAppStoreId + "?mt=8";
 				} else {
