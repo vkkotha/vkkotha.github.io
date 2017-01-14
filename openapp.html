@@ -58,6 +58,7 @@
 				androidAppStoreId: 'com.google.android.youtube',
 				appURI: 'youtube',
 				appDomain: 'www.youtube.com',
+				webDomain: 'www.youtube.com',
 				universalLinkSupport: true
 			},
 			twitter: {
@@ -65,14 +66,16 @@
 				androidAppStoreId: 'com.twitter.android',
 				appURI: 'twitter',
 				appDomain: 'www.twitter.com',
+				webDomain: 'www.twitter.com',
 				universalLinkSupport: true
 			},
 			facebook: {
 				iosAppStoreId : 'facebook/id284882215',
 				androidAppStoreId: 'com.facebook.katana',
 				appURI: 'fb',
-				appDomain: 'www.facebook.com',
-				universalLinkSupport: false
+				appDomain: 'm.facebook.com',
+				webDomain: 'www.facebook.com',
+				universalLinkSupport: true
 			}
 		};
 
@@ -165,7 +168,7 @@
 			} else {
 				if (typeof QueryString.fallback === "undefined") {
 					if (isAppFound) {
-						var webPath = "http://" + app.appDomain;
+						var webPath = "http://" + app.webDomain;
 						webPath += (appPath.length > 0) ? "/" + appPath : "";
 						document.getElementById("info").innerHTML = "Loading ..." + "<br/>" + webPath;
 						document.location.href = webPath;
