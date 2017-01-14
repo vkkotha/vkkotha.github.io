@@ -141,18 +141,22 @@
 
 		var open_app = function() {
 			if (isAppFound && (isiOS || isAndroid)) {
-				var appStoreURL = "";
-				var appURL = "";
-				if ( (isiOS && iOSVersion < 9.0) || !app.universalLinkSupport) {
-					appURL = app.appURI + "://" + ((appPath.length > 0) ? appPath : "?");
-				} else {
-					appURL = "http://" + app.appDomain + "/" + appPath;
-				}
 
 				if (isiOS) {
 					appStoreURL = "itms-apps://itunes.apple.com/app/" + app.iosAppStoreId + "?mt=8";
 				} else {
 					appStoreURL = "https://play.google.com/store/apps/details?id=" + app.androidAppStoreId;
+				}
+
+				var useUniversalLink = isiOS && iOSVersion >= 9.0 && app.universalLinkSupport;
+				var appStoreURL = "";
+				var appURL = "";
+				if (useUniversalLink) {
+					appURL = "http://" + app.appDomain + "/" + appPath;
+
+					// if App is not installed the domain hosting the app will get the request
+				} else {
+					appURL = app.appURI + "://" + ((appPath.length > 0) ? appPath : "?");
 				}
 
 				if (isiOS && iOSVersion < 9.0) {
@@ -163,11 +167,12 @@
 					document.location.href = appURL;
 				}
 
-		        window.setTimeout(function () {
-					document.getElementById("info").innerHTML = "Loading ..." + "<br/>" + appStoreURL;
-                	document.location.href = appStoreURL;
-		        }, 1000);
-
+				if (!useUniversalLink) {
+			        window.setTimeout(function () {
+						document.getElementById("info").innerHTML = "Loading ..." + "<br/>" + appStoreURL;
+	                	document.location.href = appStoreURL;
+			        }, 1000);
+			    }
 			} else {
 				if (typeof QueryString.fallback === "undefined") {
 					if (isAppFound) {
