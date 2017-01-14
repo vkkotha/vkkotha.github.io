@@ -140,7 +140,7 @@
 				var appStoreURL = "";
 				var appURL = "";
 				if ( (isiOS && iOSVersion < 9.0) || !app.universalLinkSupport) {
-					appURL = app.appURI + "://" + (appPath.length > 0) ? appPath : "?";
+					appURL = app.appURI + "://" + ((appPath.length > 0) ? appPath : "?");
 				} else {
 					appURL = "http://" + app.appDomain + "/" + appPath;
 				}
