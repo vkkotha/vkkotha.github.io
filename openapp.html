@@ -148,14 +148,14 @@
 					appStoreURL = "https://play.google.com/store/apps/details?id=" + app.androidAppStoreId;
 				}
 
-				if (isiOS) {
+				if (isiOS && iOSVersion < 9.0) {
 					document.getElementById('loader').src = appURL;
 				} else {
-					document.location.replace(appURL);
+					window.location.href = appURL;
 				}
 
 		        window.setTimeout(function () {
-                	windows.location.replace(appStoreURL);
+                	windows.location.href = appStoreURL;
 		        }, 1000);
 
 			} else {
@@ -163,13 +163,13 @@
 					if (isAppFound) {
 						var webPath = "http://" + app.appDomain;
 						webPath += (appPath.length > 0) ? "/" + appPath : "";
-						document.location.replace(webPath);
+						window.location.href = webPath;
 					} else {
 						alert("fallback url not defined");
 						return;
 					}
 				} else {
-					document.location.replace(QueryString.fallback);
+					window.location.href = QueryString.fallback;
 				}	
 			}
 		};
