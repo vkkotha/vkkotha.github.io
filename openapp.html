@@ -149,13 +149,18 @@
 				}
 
 				if (isiOS && iOSVersion < 9.0) {
+					document.getElmentById("info").innerHTML = "Loading ..." + "<br/>" + appURL;
 					document.getElementById('loader').src = appURL;
 				} else {
+					document.getElmentById("info").innerHTML = "Loading ..." + "<br/>" + appURL;
 					window.location.href = appURL;
 				}
 
 		        window.setTimeout(function () {
-                	windows.location.href = appStoreURL;
+					document.getElmentById("info").innerHTML = "Loading ..." + "<br/>" + appStoreURL;
+					window.setTimeout(function() {
+	                	windows.location.href = appStoreURL;
+					}, 5000);
 		        }, 1000);
 
 			} else {
@@ -182,6 +187,7 @@
 </head>
 
 <body style="background: #00A4E6">
+<div id="info"></div>
 <iframe style="display:none" height="0" width="0" id="loader"></iframe>
 </body>
 </html>
