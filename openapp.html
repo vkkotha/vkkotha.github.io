@@ -183,7 +183,11 @@
 						return false;
 					}
 				} else {
-					document.location.href = QueryString.fallback;
+					if (isiOS) {
+						document.getElementById('loader').src = QueryString.fallback;
+					else {
+						document.location.href = QueryString.fallback;
+					}
 				}	
 			}
 		};
